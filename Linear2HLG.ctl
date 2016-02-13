@@ -60,7 +60,7 @@ void main
  // and scale factor to remove it's system gamma
  //709
  float Y = 0.2126*linearCV[0] + 0.7152*linearCV[1] + 0.0722*linearCV[2];
- float Yinvgamma = exp(log(Y)/gamma);
+ float Yinvgamma = exp(log(Y)/(gamma-1.0));
  float scale = Yinvgamma/Y; 
  
  // scale display light RGB to remove system gamma
