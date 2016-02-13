@@ -5,26 +5,8 @@
 //
 
 
-
-
-// Assume full range input. Inverse PQ as 0-1
 import "utilities";
 import "HGL";
-
-
-// Legal Range
-//const unsigned int CV_BLACK = 4096; //64.0*64.0;
-//const unsigned int CV_WHITE = 60160;
-
-// Work with SDI Range
-//const unsigned int CV_BLACK_SDI = 256; //64.0*64.0;
-//const unsigned int CV_WHITE_SDI = 65216;
-
-// Full Range assumed:
-const unsigned int CV_BLACK = 0; //64.0*64.0;
-const unsigned int CV_WHITE = 65535;
-
-const unsigned int BITDEPTH = 16;
 
 
 
