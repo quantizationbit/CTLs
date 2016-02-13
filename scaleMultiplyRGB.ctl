@@ -1,3 +1,4 @@
+import "utilities";
 
 
 void main 
@@ -10,12 +11,13 @@ void main
   output varying float bOut,
   input uniform float scaleRED=1.0,
   input uniform float scaleGREEN=1.0,
-  input uniform float scaleBLUE=1.0
+  input uniform float scaleBLUE=1.0,
+  input uniform float CLIP=65535.0
 )
 {
 
-  rOut = rIn*scaleRED;
-  gOut = gIn*scaleGREEN;
-  bOut = bIn*scaleBLUE;
+  rOut = clamp(rIn*scaleRED, 0.0, CLIP);
+  gOut = clamp(gIn*scaleGREEN, 0.0, CLIP);
+  bOut = clamp(bIn*scaleBLUE, 0.0, CLIP);
   //aOut = aIn;
 }

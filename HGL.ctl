@@ -3,6 +3,8 @@
 // 
 // Hybrid Gamma Log
 //
+//OETF function
+// encodes scene linear to HLG 100% relative
 
 
 // NHK HLG constants:
