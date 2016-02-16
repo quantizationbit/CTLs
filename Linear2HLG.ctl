@@ -18,7 +18,9 @@ void main
     output varying float rOut,
     output varying float gOut,
     output varying float bOut,
-    input uniform float LRefDisplay=800.0
+    input uniform float LRefDisplay=800.0,
+    input uniform float Lb = 0.05,
+    input uniform bool  R2020=true
 )
 {
 
@@ -40,10 +42,16 @@ void main
  
  // calculate display light luminance
  // and scale factor to remove it's system gamma
+ float Yd;
+ if(!R2020) {
  //709
- float Y = 0.2126*linearCV[0] + 0.7152*linearCV[1] + 0.0722*linearCV[2];
- float Yinvgamma = exp(log(Y)/(gamma-1.0));
- float scale = Yinvgamma/Y; 
+    Yd = 0.2126*linearCV[0] + 0.7152*linearCV[1] + 0.0722*linearCV[2];
+} else {
+ //2020
+	Yd = 0.2627*linearCV[0] + 0.6780*linearCV[1] + 0.0593*linearCV[2];
+}
+ float Ys = exp(log(Yd)/(gamma-1.0));
+ float scale = Ys/Yd; 
  
  // scale display light RGB to remove system gamma
  linearCV[0] = scale*linearCV[0];
