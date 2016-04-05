@@ -11,6 +11,10 @@ import "odt-transforms-common";
 import "utilities-color";
 import "PQ";
 
+const float XYZ_2_2020_PRI_MAT[4][4] = XYZtoRGB(REC2020_PRI,1.0);
+const float R709_PRI_2_XYZ_MAT[4][4] = RGBtoXYZ(REC709_PRI,1.0);
+
+
 
 const unsigned int BITDEPTH = 16;
 // video range is
@@ -58,6 +62,10 @@ void main
     linearCV = clamp_f3( linearCV, 0., 1);
     linearCV = mult_f_f3(peak/10000.0, linearCV);
     
+  // convert 709 to 2020
+     float XYZ[3] = mult_f3_f44( linearCV, R709_PRI_2_XYZ_MAT);
+    // Convert from XYZ to ACES primaries
+    linearCV = mult_f3_f44( XYZ, XYZ_2_2020_PRI_MAT);          
   
   float cctf[3]; 
   cctf[0] = CV_BLACK + (CV_WHITE - CV_BLACK) * PQ10000_r(linearCV[0]);
